@@ -1,10 +1,10 @@
 sbtPlugin := true
 
-name := "sbt-buildinfo"
+name := "sbt-liftinfo"
 
-organization := "com.eed3si9n"
+organization := "com.heirko"
 
-version := "0.3.2"
+version := "0.1.4"
 
 // sbtVersion in Global := "0.13.0" 
 
@@ -14,7 +14,7 @@ scalacOptions := Seq("-unchecked", "-deprecation")
 
 description := "sbt plugin to generate build info"
 
-licenses := Seq("MIT License" -> url("https://github.com/sbt/sbt-buildinfo/blob/master/LICENSE"))
+licenses := Seq("MIT License" -> url("https://github.com/sbt/sbt-liftinfo/blob/master/LICENSE"))
 
 publishArtifact in (Compile, packageBin) := true
 
