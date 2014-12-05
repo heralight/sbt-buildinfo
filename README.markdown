@@ -5,6 +5,55 @@ sbt-liftinfo
 
 sbt-liftinfo generates Scala source from your build definitions.
 
+fork from sbt-buildinfo
+
+Why a fork
+----------
+
+sbt-buidinfo generate scala code, which can change at each compilation.
+with sbt-liftinfo you only a property file ...
+
+and you can it like :
+
+```
+import code.lib.PropsUtils
+import net.liftweb.common._
+import net.liftweb.http._
+import S._
+import net.liftweb.util._
+import Helpers._
+import scala.xml._
+
+case object BuildInfo {
+  val props = PropsUtils.getProperties("/lift-info.properties") openOrThrowException("Missing correct /lift-info.properties")
+
+  /** The value is "Primimo". */
+  val projectName = PropsUtils.getOrDie(props, "projectName")
+  /** The value is "Heirko". */
+  val organization = PropsUtils.getOrDie(props, "organization")
+  /** The value is "0.4". */
+  val version = PropsUtils.getOrDie(props, "version")
+  /** The value is "2.11.2". */
+  val scalaVersion = PropsUtils.getOrDie(props, "scalaVersion")
+  /** The value is "0.13.5". */
+  val sbtVersion = PropsUtils.getOrDie(props, "sbtVersion")
+  /** The value is 3426. */
+  val buildinfoBuildnumber = PropsUtils.getOrDie(props, "liftinfoBuildnumber").toInt
+  /** The value is ("()" -> 1417769372396L). */
+  val buildTime = PropsUtils.getOrDie(props, "buildTime")
+  override val toString = "projectName: %s, organization: %s, version: %s, scalaVersion: %s, sbtVersion: %s, buildinfoBuildnumber: %s, buildTime: %s" format (projectName, organization, version, scalaVersion, sbtVersion, buildinfoBuildnumber, buildTime)
+
+  val toMap = Map[String, Any](
+    "projectName" -> projectName,
+    "organization" -> organization,
+    "version" -> version,
+    "scalaVersion" -> scalaVersion,
+    "sbtVersion" -> sbtVersion,
+    "buildinfoBuildnumber" -> buildinfoBuildnumber,
+    "buildTime" -> buildTime)
+}
+```
+
 Latest Stable
 -------------
 
